@@ -1,35 +1,70 @@
-def modify_content(content):
-    """
-    Example modification: convert text to uppercase.
-    You can change this logic to any transformation you want.
-    """
-    return content.upper()
+# ----------------------------
+# Assignment 1: Custom Class with Inheritance
+# ----------------------------
 
-try:
-    # Ask the user for the file name to read
-    input_file = input("Enter the name of the file to read: ")
+class Device:
+    def __init__(self, brand, model):
+        self.brand = brand
+        self.model = model
 
-    # Try opening and reading the file
-    with open(input_file, "r") as file:
-        original_content = file.read()
+    def device_info(self):
+        print(f"Device: {self.brand} {self.model}")
 
-    # Modify the file content
-    modified_content = modify_content(original_content)
+class Smartphone(Device):
+    def __init__(self, brand, model, storage, battery_life):
+        super().__init__(brand, model)
+        self.storage = storage
+        self.battery_life = battery_life
 
-    # Ask for the output file name
-    output_file = input("Enter the name of the new file to write to: ")
+    def make_call(self, contact):
+        print(f"📞 Calling {contact} from {self.brand} {self.model}")
 
-    # Write the modified content to the new file
-    with open(output_file, "w") as file:
-        file.write(modified_content)
+    def device_info(self):
+        print(f"Smartphone: {self.brand} {self.model}, Storage: {self.storage}GB, Battery: {self.battery_life} hours")
 
-    print(f"✅ File has been read from '{input_file}' and written to '{output_file}' successfully!")
+class Tablet(Device):
+    def __init__(self, brand, model, screen_size):
+        super().__init__(brand, model)
+        self.screen_size = screen_size
 
-except FileNotFoundError:
-    print("❌ Error: The file you entered does not exist. Please check the file name and try again.")
+    def device_info(self):
+        print(f"Tablet: {self.brand} {self.model}, Screen Size: {self.screen_size}\"")
 
-except PermissionError:
-    print("❌ Error: You do not have permission to read or write this file.")
 
-except Exception as e:
-    print(f"⚠️ An unexpected error occurred: {e}")
+# Create objects for Assignment 1
+phone = Smartphone("Samsung", "Galaxy S23", 256, 24)
+tablet = Tablet("Apple", "iPad Pro", 12.9)
+
+print("=== Assignment 1: Device Information ===")
+phone.device_info()
+phone.make_call("Alice")
+tablet.device_info()
+
+
+# ----------------------------
+# Assignment 2: Polymorphism Challenge
+# ----------------------------
+
+class Animal:
+    def move(self):
+        print("The animal is moving.")
+
+class Dog(Animal):
+    def move(self):
+        print("🐕 The dog is running")
+
+class Bird(Animal):
+    def move(self):
+        print("🐦 The bird is flying")
+
+class Fish(Animal):
+    def move(self):
+        print("🐟 The fish is swimming")
+
+
+# Create objects for Assignment 2
+animals = [Dog(), Bird(), Fish()]
+
+print("\n=== Assignment 2: Animal Movements ===")
+for animal in animals:
+    animal.move()
